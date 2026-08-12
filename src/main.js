@@ -7,6 +7,7 @@ import zhCn from "element-plus/es/locale/lang/zh-cn";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import axios from "axios";
 import { get, post } from "./network/request";
+import { installAuthInterceptors } from "./network/auth";
 import router from "./router";
 import store from "./store";
 import VueParticles from "vue3-particles"; // 粒子效果模板
@@ -14,6 +15,7 @@ import VueParticles from "vue3-particles"; // 粒子效果模板
 import "./assets/css/base.css";
 
 const app = createApp(App);
+installAuthInterceptors(axios);
 
 // 添加全局变量
 app.config.globalProperties.$message = ElMessage;

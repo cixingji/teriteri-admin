@@ -178,8 +178,8 @@ export default {
             const result = await axios.post("/api/admin/account/login", {
                 username: this.username,
                 password: this.password,
-            }).catch(() => {
-                ElMessage.error("用户名或密码错误");
+            }).catch((error) => {
+                ElMessage.error(error.response?.data?.message || "用户名或密码错误");
                 this.$store.state.isLoading = false;
             });
             if (!result) {
@@ -191,7 +191,8 @@ export default {
                 this.$store.state.isLoading = false;
             }
             if (result.data.code === 200) {
-                localStorage.setItem("teri_token", result.data.data.token); // 浏览器缓存token
+                localStorage.setItem("teri_token", result.data.data.accessToken || result.data.data.token);
+                localStorage.setItem("teri_role", String(result.data.data.role));
                 this.$store.commit("updateUser", result.data.data.user);    // 更新vuex中当前用户信息
                 ElMessage.success(result.data.message);
                 this.$store.commit("updateIsLogin", true);  // 修改在线状态

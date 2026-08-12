@@ -69,7 +69,7 @@ export default createStore({
         },
         
         // 退出登录
-        logout(context) {
+        async logout(context) {
             // 先修改状态再发送请求，防止token过期导致退出失败
             // 修改当前的登录状态
             context.state.isLogin = false;
@@ -77,13 +77,12 @@ export default createStore({
             context.state.user = {};
             router.push("/login");
             // 发送退出请求，处理redis中的缓存信息，不能用异步，不然token过期导致退出失败，后面步骤卡死
-            axios.get("/api/admin/account/logout", {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("teri_token"),
-                },
-            });
+            await axios.post("/api/auth/logout", null, {
+                headers: { "X-Auth-Scope": "admin" },
+            }).catch(() => {});
             // 清除本地token缓存
             localStorage.removeItem("teri_token");
+            localStorage.removeItem("teri_role");
         }
     }
 })
