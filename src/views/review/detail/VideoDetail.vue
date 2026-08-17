@@ -4,7 +4,7 @@
             <div class="video-detail__layout">
                 <div class="left">
                     <div id="player" class="player">
-                        <video :src="video.videoUrl" controls></video>
+                        <video ref="reviewPlayer" class="video-js vjs-big-play-centered" controls></video>
                     </div>
                     <div class="v-card options">
                         <div class="options-top">
@@ -82,6 +82,8 @@
 <script>
 import { linkify } from '@/utils/utils.js';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import videojs from 'video.js';
+import 'video.js/dist/video-js.css';
 
 export default {
     name: "VideoDetail",
@@ -92,6 +94,7 @@ export default {
             category: {},   // 视频分区信息
             tags: [],   // 投稿标签
             isMiniWidth: false, // 判断是否小窗
+            playerInstance: null,
         }
     },
     methods: {
@@ -112,7 +115,16 @@ export default {
                 this.user = res.data.data.user;
                 this.category = res.data.data.category;
                 this.tags = res.data.data.video.tags.split("\r\n").filter(tag => tag.trim() !== "");
+                this.$nextTick(this.loadReviewVideo);
             }
+        },
+
+        loadReviewVideo() {
+            if (!this.video.videoUrl || !this.$refs.reviewPlayer) return;
+            const separator = this.video.videoUrl.includes('?') ? '&' : '?';
+            const protectedUrl = this.video.videoUrl + separator + 'access_token=' + encodeURIComponent(localStorage.getItem('teri_token') || '');
+            if (!this.playerInstance) this.playerInstance = videojs(this.$refs.reviewPlayer, { fluid: true });
+            this.playerInstance.src({ src: protectedUrl, type: /\.m3u8/i.test(this.video.videoUrl) ? 'application/x-mpegURL' : 'video/mp4' });
         },
 
         // 更新视频状态
@@ -193,6 +205,7 @@ export default {
         window.addEventListener('resize', this.changeWidth);
     },
     unmounted() {
+        if (this.playerInstance) this.playerInstance.dispose();
         window.removeEventListener('resize', this.updatePlayerHeight);
         window.removeEventListener('resize', this.changeWidth);
     }

@@ -10,6 +10,7 @@ const Ranking = () => import("@/views/content/RankingManage.vue");
 const Tag = () => import("@/views/content/TagManage.vue");
 const Video = () => import("@/views/review/VideoReview.vue");
 const VideoDetail = () => import("@/views/review/detail/VideoDetail.vue");
+const TranscodeTasks = () => import("@/views/review/TranscodeTasks.vue");
 const Article = () => import("@/views/review/ArticleReview.vue");
 const Avatar = () => import("@/views/review/AvatarReview.vue");
 const Dynamic = () => import("@/views/review/DynamicReview.vue");
@@ -53,6 +54,7 @@ const routes = [
             ]
           },
           { path: '/review/article', component: Article, meta: { requestAuth: true } },
+          { path: '/review/transcode', component: TranscodeTasks, meta: { requestAuth: true } },
           { path: '/review/avatar', component: Avatar, meta: { requestAuth: true } },
           { path: '/review/dynamic', component: Dynamic, meta: { requestAuth: true } },
           { path: '/review/comment', component: Comment, meta: { requestAuth: true } },

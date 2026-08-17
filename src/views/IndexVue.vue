@@ -103,6 +103,10 @@
                             <i class="iconfont icon-shipinshenhe"></i>
                             <span>视频审核</span>
                         </el-menu-item>
+                        <el-menu-item index="/review/transcode">
+                            <i class="iconfont icon-shipinshenhe"></i>
+                            <span>转码任务</span>
+                        </el-menu-item>
                         <el-menu-item index="/review/article">
                             <i class="iconfont icon-wenzhang"></i>
                             <span>文章审核</span>
@@ -191,7 +195,7 @@ export default {
             maskingDisplay: "none",
             maskingOpacity: 0,
             active: "", // 侧栏活动项
-            path: ["/home", "/data", "/content/carousel", "/content/hot-search", "/content/ranking", "/review/video",
+            path: ["/home", "/data", "/content/carousel", "/content/hot-search", "/content/ranking", "/review/video", "/review/transcode",
             "/review/article", "/review/avatar", "/review/dynamic", "/review/comment", "/review/danmu", "/case/report",
             "/case/appeal", "/system/role", "/system/user"],   // 用于判断当前活动页
             defOpenMenu: ["/content", "/review", "/case", "/system"],    // 默认展开的子菜单
