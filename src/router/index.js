@@ -20,6 +20,7 @@ const Report = () => import("@/views/case/ReportCase.vue");
 const Appeal = () => import("@/views/case/AppealCase.vue");
 const User = () => import("@/views/system/UserManage.vue");
 const Role = () => import("@/views/system/RoleManage.vue");
+const Sync = () => import("@/views/system/SyncManage.vue");
 
 const routes = [
   { path: "/", redirect: "" },
@@ -75,6 +76,7 @@ const routes = [
         children: [
           { path: '/system/user', component: User, meta: { requestAuth: true } },
           { path: '/system/role', component: Role, meta: { requestAuth: true } },
+          { path: '/system/sync', component: Sync, meta: { requestAuth: true } },
         ]
       },
     ]
