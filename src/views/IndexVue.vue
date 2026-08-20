@@ -159,6 +159,10 @@
                             <i class="iconfont icon-shujuzhongxin"></i>
                             <span>数据同步</span>
                         </el-menu-item>
+                        <el-menu-item index="/system/traffic">
+                            <i class="iconfont icon-shujuzhongxin"></i>
+                            <span>Kafka 流量治理</span>
+                        </el-menu-item>
                     </el-sub-menu>
                 </el-menu>
             </div>
@@ -200,7 +204,7 @@ export default {
             maskingOpacity: 0,
             active: "", // 侧栏活动项
             path: ["/home", "/data", "/content/carousel", "/content/hot-search", "/content/ranking", "/review/video", "/review/transcode",
-            "/review/article", "/review/avatar", "/review/dynamic", "/review/comment", "/review/danmu", "/case/report", "/system/sync",
+            "/review/article", "/review/avatar", "/review/dynamic", "/review/comment", "/review/danmu", "/case/report", "/system/sync", "/system/traffic",
             "/case/appeal", "/system/role", "/system/user"],   // 用于判断当前活动页
             defOpenMenu: ["/content", "/review", "/case", "/system"],    // 默认展开的子菜单
         }

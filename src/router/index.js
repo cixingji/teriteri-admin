@@ -21,6 +21,7 @@ const Appeal = () => import("@/views/case/AppealCase.vue");
 const User = () => import("@/views/system/UserManage.vue");
 const Role = () => import("@/views/system/RoleManage.vue");
 const Sync = () => import("@/views/system/SyncManage.vue");
+const Traffic = () => import("@/views/system/TrafficManage.vue");
 
 const routes = [
   { path: "/", redirect: "" },
@@ -77,6 +78,7 @@ const routes = [
           { path: '/system/user', component: User, meta: { requestAuth: true } },
           { path: '/system/role', component: Role, meta: { requestAuth: true } },
           { path: '/system/sync', component: Sync, meta: { requestAuth: true } },
+          { path: '/system/traffic', component: Traffic, meta: { requestAuth: true } },
         ]
       },
     ]
